@@ -1,7 +1,7 @@
 # JSBootcamp
 ## Array functions
-Example array:
 ```
+Example array:
 const notes = [
     {
         title: 'My next trip',
