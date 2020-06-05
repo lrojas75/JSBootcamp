@@ -1,7 +1,7 @@
 # JSBootcamp
 ## Array functions
 Example array:
-const notes = [
+```const notes = [
     {
         title: 'My next trip',
         body: 'I would like to go to Spain'
@@ -11,7 +11,7 @@ const notes = [
     }, {
         title: 'Office modification',
         body: 'Get a new seat'
-}];
+}];```
 
 find(cbFunction):
     Returns the first element that matches the criteria.
