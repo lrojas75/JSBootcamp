@@ -85,12 +85,13 @@ indexOf(element):
     notes.indexOf('Third Item'); //Returns 2
 ```
 ## Local Storage functions
- ** localStorage only stores strings **
+ **localStorage only stores strings**
+```
 localStorage.setItem('location', 'Philadelphia'); // Store
 const result = localStorage.getItem('location'); // Retrieve
 localStorage.removeItem('location'); //Delete
 localStorage.clear(); // Delete all stored data in localStorage
-```
+
 const user = {
     name:'Luis',
     age: 30
@@ -101,11 +102,11 @@ JSON.parse(string) --> turns string to object.
 ```
 
 ## Debug
-'debugger' keyword inside js code causes the browser to pause execution wherever that keyword is found
+**debugger** keyword inside js code causes the browser to pause execution wherever that keyword is found
 and opens the browser's debugging tools.
 
 ## UUID
-File /utilities/uuidv4.js contains a library to create uuids. The function to call is uuidv4().
+File /utilities/uuidv4.js contains a library to create uuids. The function to call is **uuidv4()**.
 Create the file with the content of uuidv4.js and import it into the project.
 
 ## Sync data
