@@ -1,0 +1,20 @@
+<html>
+    <head></head>
+    <body>
+        <h1>Todos</h1>
+        <input type="text" id="search_text" placeholder="Filter todos">
+        <br><br>
+        <form id="todo_form">
+            <input type="text" name="todo_title" placeholder="Add something to do">
+            <button>Add todo</button>
+        </form>
+        <label>
+            Hide completed todos <input id='hide_completed' type="checkbox">
+        </label>
+        <div id="todos"></div>
+
+        <script src="./utilities/uuidv4.js"></script>
+        <script src="todos-functions.js"></script>
+        <script src="todos-app.js"></script>
+    </body>
+</html>
