@@ -44,13 +44,16 @@ filter(cbFunction):
     }
 
 sort(cbFunction?):
-    // Organizes an array alphabetically by default.
-    /* It can receive a callback function as a parameter to organize based on a specific criteria. The callback function
+    Organizes an array alphabetically by default.
+    
+    It can receive a callback function as a parameter to organize based on a specific criteria. The callback function
     receives two paramaters (ex: a,b) to compare them on each iteration. */
-    // Inside the callback function, 1 should be returned if a is more that b, -1  if a is less than b and 0 if they are equal.
+    
+    Inside the callback function, 1 should be returned if a is more that b, -1  if a is less than b and 0 if they are equal.
+    
     let fruits = ["Banana", "Orange", "Apple", "Mango"];
-    fruits.sort(),¡;
-    // Returns: Apple,Banana,Mango,Orange
+    fruits.sort();
+    Returns: Apple,Banana,Mango,Orange
 
 splice():
     To delete an item from an array: splice(index, num of elements to delete)
@@ -80,14 +83,14 @@ indexOf(element):
     ** Two objects are the same when they have the same reference in memory. **
     const array = ['First item', 'Second item', 'Third item'];
     notes.indexOf('Third Item'); //Returns 2
-
+```
 ## Local Storage functions
  ** localStorage only stores strings **
 localStorage.setItem('location', 'Philadelphia'); // Store
 const result = localStorage.getItem('location'); // Retrieve
 localStorage.removeItem('location'); //Delete
 localStorage.clear(); // Delete all stored data in localStorage
-
+```
 const user = {
     name:'Luis',
     age: 30
