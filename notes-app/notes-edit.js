@@ -1,6 +1,7 @@
 const titleElement = document.getElementById('note_title');
 const bodyElement = document.getElementById('note_body');
 const removeElement = document.getElementById('remove_note');
+const dateElement = document.getElementById('last_edit');
 
 const noteId = location.hash.substring(1);
 let notes = getSavedNotes();
@@ -15,12 +16,18 @@ if(note === undefined) {
 titleElement.value = note.title;
 bodyElement.value = note.body;
 
+dateElement.textContent = generateLastEdited(note.updatedAt);
+
 titleElement.oninput = function(e) {
     note.title = e.target.value;
+    note.updatedAt = moment().valueOf();
+    dateElement.textContent = generateLastEdited(note.updatedAt);
     saveNotes(notes);
 };
 bodyElement.oninput = function(e) {
     note.body = e.target.value;
+    note.updatedAt = moment().valueOf();
+    dateElement.textContent = generateLastEdited(note.updatedAt);
     saveNotes(notes);   
 }
 removeElement.onclick = function() {
@@ -41,6 +48,6 @@ window.onstorage = function(e) {
         }
         titleElement.value = note.title;
         bodyElement.value = note.body;
-
+        lastEditElement.textContent = generateLastEdited(note.updatedAt);
     }
 }

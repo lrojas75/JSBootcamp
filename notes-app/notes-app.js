@@ -2,19 +2,21 @@
 let notes = getSavedNotes();
 
 const filters = {
-    searchText: ''
+    searchText: '',
+    sortBy: 'byEdited'
 };
 
 renderNotes(notes, filters);
 
 document.getElementById('create_note').onclick = function(e) {
-    const now = new Date();
-    const timestamp = now.getTime();
+    const timestamp = moment().valueOf();
+
     const note = {
         id: uuidv4(),
         title: '',
         body: '',
-        createdAt: timestamp
+        createdAt: timestamp,
+        updatedAt: timestamp,
     };
     notes.push(note);
     saveNotes(notes);
@@ -26,7 +28,8 @@ document.getElementById('search_text').oninput = function(e) {
 }
 
 document.getElementById('filter_by').onchange = function(e) {
-    e.target.value;
+    filters.sortBy = e.target.value;
+    renderNotes(notes, filters);
 }
 
 window.onstorage = function(e) {
