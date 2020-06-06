@@ -1,3 +1,0 @@
-Set up Web Server:
-1. Download live-server using npm: npm install -g live-server
-2. live-server folder_name --> folder which contains website files.

@@ -1,3 +1,5 @@
+'use strict'
+
 // Check for previously stored data
 const todos = getSavedTodos();
 
@@ -8,12 +10,12 @@ const filters = {
 
 renderTodos(todos, filters);
 
-document.getElementById('search_text').oninput = function(e) {
+document.getElementById('search_text').oninput = (e) => {
     filters.searchText = e.target.value;
     renderTodos(todos, filters);
 }
 
-document.getElementById('todo_form').onsubmit = function(e) {
+document.getElementById('todo_form').onsubmit = (e) => {
     e.preventDefault();
     todos.push({
         id: uuidv4(),
@@ -25,7 +27,7 @@ document.getElementById('todo_form').onsubmit = function(e) {
     e.target.elements.todo_title.value = '';
 }
 
-document.getElementById('hide_completed').onchange = function(e) {
+document.getElementById('hide_completed').onchange = (e) => {
     filters.hideCompleted = e.target.checked;
     renderTodos(todos, filters);
 }

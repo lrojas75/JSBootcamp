@@ -1,3 +1,5 @@
+'use strict'
+
 // Check for stored data
 let notes = getSavedNotes();
 
@@ -8,7 +10,7 @@ const filters = {
 
 renderNotes(notes, filters);
 
-document.getElementById('create_note').onclick = function(e) {
+document.getElementById('create_note').onclick = (e) => {
     const timestamp = moment().valueOf();
 
     const note = {
@@ -22,17 +24,17 @@ document.getElementById('create_note').onclick = function(e) {
     saveNotes(notes);
     location.assign(`/edit.html#${note.id}`);
 }
-document.getElementById('search_text').oninput = function(e) {
+document.getElementById('search_text').oninput = (e) => {
     filters.searchText = e.target.value;
     renderNotes(notes, filters);
 }
 
-document.getElementById('filter_by').onchange = function(e) {
+document.getElementById('filter_by').onchange = (e) => {
     filters.sortBy = e.target.value;
     renderNotes(notes, filters);
 }
 
-window.onstorage = function(e) {
+window.onstorage = (e) => {
     if(e.key === 'notes') {
         notes = JSON.parse(e.newValue);
         renderNotes(notes, filters);
