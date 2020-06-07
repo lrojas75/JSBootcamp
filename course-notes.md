@@ -84,6 +84,16 @@ indexOf(element):
     ** Two objects are the same when they have the same reference in memory. **
     const array = ['First item', 'Second item', 'Third item'];
     notes.indexOf('Third Item'); //Returns 2
+
+every(cbFunction);
+    Executes the cbFunction on every element of the array. The final result is a boolean.
+
+join();
+    Returns a string with all the elements of the array separated by a comma (,).
+    ['a', 'v'].join(); // Returns "a,v".
+    ['a', 'v'].join(''); // Returns "av".
+    ['a', 'v'].join('--'); // Returns "a--v".
+
 ```
 ## Local Storage functions
  **localStorage only stores strings**
@@ -163,3 +173,179 @@ console.log(typeNum); // Prints number
 const typeObj = typeof {};
 console.log(typeObj); // Prints object
 ```
+
+## HTTP request/response
+````
+const request = new XMLHttpRequest();
+
+'readyState' has 5 states: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+**Add a listener to the request to know when the response is received.**
+request.onreadystatechange = function(e) {
+    if(e.target.readyState === 4) {
+        const data = JSON.parse(e.target.responseText);
+        console.log(data.puzzle);
+    }
+}
+HTTP statuses: httpstatuses.com
+
+request.open('GET', 'http://puzzle.mead.io/puzzle');
+request.send();
+```
+Rest API of Countries: restcountries.eu
+````
+const countryRequest = new XMLHttpRequest();
+countryRequest.onreadystatechange = (e) => {
+    if(e.target.readyState === 4 && e.target.status === 200) {
+        const data = JSON.parse(e.target.responseText);
+        const country = data.find((country) => country.alpha2Code === 'CO');
+        console.log(country.name);
+    }
+}
+countryRequest.open('GET', 'https://restcountries.eu/rest/v2/all');
+countryRequest.send();
+```
+## cb functions
+```
+// Function in file that expects the response of the http call
+getPuzzle((puzzle) => {
+    console.log(puzzle)
+});
+
+// HTTP call in another file.
+const getPuzzle = (cb) => {
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = (e) => {
+        if(e.target.readyState === 4 && e.target.status === 200) {
+            const data = JSON.parse(e.target.responseText);
+            cb(data.puzzle)
+        } else if(e.target.readyState === 4) {
+            console.log("Error");
+        }
+    }
+
+    request.open('GET', 'http://puzzle.mead.io/puzzle?wordCount=3'); // by default is Async.
+    request.send();
+}
+This causes the program to execute the console log only after the response is back. The function waits for the response,
+not the app. Async behaviour.
+
+for sync behaviour, add false param to open():
+const puzzle = getPuzzleSync();
+
+const getPuzzleSync = () => {
+    const request = new XMLHttpRequest();
+    request.open('GET', 'http://puzzle.mead.io/puzzle?wordCount=3', false);
+    request.send();
+
+    if(request.readyState === 4 && request.status === 200) {
+        const data = JSON.parse(request.responseText);
+        return data.puzzle;
+    } else if(request.readyState === 4) {
+        throw new Error('Error!');
+    }
+}
+
+HTTP call with fetch()
+With fetch(), we dont have to validate if the request completed (readyState), this will respond when it completes. 
+We just have to validate how it completed (resolve or reject).
+
+const getPuzzle = (wordCount) => {
+    return fetch(`http://puzzle.mead.io/puzzle?wordCount=${wordCount}`).then((response) => {
+        if(response.status === 200) {
+            return response.json();
+        } else {
+            throw new Error('Unable to fetch puzzle.');
+        }
+    });
+};
+
+getPuzzle('2').then((data) => {
+    console.log('Puzzle: ', data.puzzle);
+}).catch((err) => {
+    console.log(`Error: ${err}`);
+});
+```
+
+## Closure
+````
+const createCounter = () => {
+    let count = 0;
+
+    return{
+        increment() {
+            count++;
+        }
+        decrement() {
+            count--;
+        }
+        get() {
+            return count;
+        }
+    } 
+}
+
+const counter = createCounter();
+counter.increment();
+counter.decrement();
+// counter.count = 0; wont work.
+console.log(counter.get());
+
+//Adder
+const createAdder = (a) => {
+    return (b) => {
+        return a + b;
+    }
+};
+const add10 = createAdder(10);
+console.log(add10(-2)); // Returns 8
+console.log(add10(20)); // Returns 30
+```
+## Promise
+### Promise chaining
+```
+getLocation().then((location) => {
+    return getCountry(location.country);
+}).then((countryName) => {
+    console.log(countryName);
+    //console.log(`You are currently in ${data.city} ${data.region} ${countryName}`);
+}).catch((err) => {
+    console.log(err);
+});
+
+const getCountry = (countryCode) => {
+    return fetch('https://restcountries.eu/rest/v2/all').then((response) => {
+        if(response.status === 200) {
+            return response.json();
+        } else {
+            throw new Error('Error fetching data.')
+        }
+    }).then((data) => {
+        const country = data.find((country) => country.alpha2Code === countryCode);
+        if(country) {
+            return country.name;
+        } else {
+            throw new Error('Country not found');
+        }
+    }).catch((err) => {
+        throw new Error(err);
+    });
+};
+
+const getLocation = () => {
+    return fetch('https://ipinfo.io/json?token=6a8cfbbadb2d32').then((response) => {
+        if(response.status === 200) {
+            return response.json();
+        } else {
+            throw new Error('Failed to fetch data.');
+        }
+    }).catch((err) => {
+        throw new Error(err);
+    });
+}
+```
+
+## APIs
+random words: http://puzzle.mead.io/puzzle?wordCount=${wordCount}
+Countries: https://restcountries.eu/rest/v2/all
+ipinfo: http://ipinfo.io/json?token=token_id
