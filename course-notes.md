@@ -425,3 +425,29 @@ module.exports = {
 ```npm run webpack```
 This creates the file main.js
 
+## imports and exports
+Named export 
+```
+export const add = (a, b) => a + b;
+export const name = 'Andrew';
+
+import { add, name } from './utilities'
+```
+Default export: It can only be one.
+```
+const square = (x) => x * x;
+export default square;
+
+For default imports, I can import it with the same name or with any name I choose.
+import square from './utilities' or import someName from './utilities'
+```
+Another way to do export:
+```
+const add = (a, b) => a + b;
+
+const name = 'Andrew';
+
+const square = (x) => x * x;
+
+export { add, name, square as default }
+```
