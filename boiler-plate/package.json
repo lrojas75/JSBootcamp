@@ -4,7 +4,8 @@
   "description": "",
   "main": "input.js",
   "scripts": {
-    "build": "babel src/index.js -o public/scripts/bundle.js --presets env --watch"
+    "build": "babel src/index.js -o public/scripts/bundle.js --presets env --watch",
+    "serve": "live-server public"
   },
   "author": "",
   "license": "ISC",

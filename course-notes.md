@@ -116,6 +116,9 @@ JSON.parse(string) --> turns string to object.
 1. Download live-server using npm: npm install -g live-server
 2. live-server folder_name --> folder which contains website files.
 
+Using package.json don't install it using -g flag so it is install as a local dependency.
+To run it as a local dependency add the following script in package.json: ```"serve": "live-server public"```.
+
 ## Debug
 **debugger** keyword inside js code causes the browser to pause execution wherever that keyword is found
 and opens the browser's debugging tools.
