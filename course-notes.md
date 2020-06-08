@@ -145,6 +145,7 @@ myDate.getSeconds();
 
 ## Truthy and Falsy
 Falsy values -> false, 0, empty string, null, undefined, NaN.
+
 Truthy values -> non-empty string (ex: 'false', 'hi', '1'), [], {}, 1, -1
 
 ## Type Coercion
@@ -175,7 +176,7 @@ console.log(typeObj); // Prints object
 ```
 
 ## HTTP request/response
-````
+```
 const request = new XMLHttpRequest();
 
 'readyState' has 5 states: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
@@ -192,7 +193,7 @@ request.open('GET', 'http://puzzle.mead.io/puzzle');
 request.send();
 ```
 Rest API of Countries: restcountries.eu
-````
+```
 const countryRequest = new XMLHttpRequest();
 countryRequest.onreadystatechange = (e) => {
     if(e.target.readyState === 4 && e.target.status === 200) {
@@ -204,7 +205,7 @@ countryRequest.onreadystatechange = (e) => {
 countryRequest.open('GET', 'https://restcountries.eu/rest/v2/all');
 countryRequest.send();
 ```
-## cb functions
+## Callback functions
 ```
 // Function in file that expects the response of the http call
 getPuzzle((puzzle) => {
@@ -268,7 +269,7 @@ getPuzzle('2').then((data) => {
 ```
 
 ## Closure
-````
+```
 const createCounter = () => {
     let count = 0;
 

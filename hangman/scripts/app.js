@@ -11,7 +11,12 @@ window.onkeypress = (e) => {
 }
 
 const render = () => {
-    puzzleEl.textContent = game.puzzle;
+    puzzleEl.innerHTML = '';
+    game.puzzle.split('').forEach((letter) => {
+        const spanEl = document.createElement('span');
+        spanEl.textContent = letter;
+        puzzleEl.appendChild(spanEl);
+    });
     guessesEl.textContent = game.statusMessage;
 }
 

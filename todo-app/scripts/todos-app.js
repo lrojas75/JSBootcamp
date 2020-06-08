@@ -17,14 +17,17 @@ document.getElementById('search_text').oninput = (e) => {
 
 document.getElementById('todo_form').onsubmit = (e) => {
     e.preventDefault();
-    todos.push({
-        id: uuidv4(),
-        title: e.target.elements.todo_title.value, 
-        completed: false
-    });
-    saveTodos(todos);
-    renderTodos(todos, filters);
-    e.target.elements.todo_title.value = '';
+    const text = e.target.elements.todo_title.value.trim();
+    if(text.length > 0) {
+        todos.push({
+            id: uuidv4(),
+            text, 
+            completed: false
+        });
+        saveTodos(todos);
+        renderTodos(todos, filters);
+        e.target.elements.todo_title.value = '';
+    }
 }
 
 document.getElementById('hide_completed').onchange = (e) => {
