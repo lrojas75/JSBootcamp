@@ -5,6 +5,7 @@
   "main": "input.js",
   "scripts": {
     "build": "babel src/index.js -o public/scripts/bundle.js --presets env --watch",
+    "webpack": "webpack",
     "serve": "live-server public"
   },
   "author": "",
