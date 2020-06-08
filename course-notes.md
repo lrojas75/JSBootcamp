@@ -370,7 +370,7 @@ surge teardown
 ..asks for domain..
 ```
 
-## Babel
+## Project setup using only Babel
 ```
 **Install packages without the -g so they are added as a local dependency in the project**
 
@@ -398,3 +398,7 @@ app
 
 To uninstall global packages:
 npm uninstall -g babel-cli live-server
+
+## Project setup using Webpack
+### setup
+```npm install webpack webpack-cli```.
